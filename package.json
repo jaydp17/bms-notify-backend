@@ -1,0 +1,20 @@
+{
+  "name": "bms-notify-backend",
+  "version": "0.0.1",
+  "author": "Jaydeep Solanki <jaydp17@gmail.com> (https://jaydp.com)",
+  "bugs": {
+    "url": "https://github.com/jaydp17/bms-notify-backend/issues"
+  },
+  "homepage": "https://github.com/jaydp17/bms-notify-backend#readme",
+  "keywords": [],
+  "license": "MIT",
+  "main": "index.js",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jaydp17/bms-notify-backend.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
