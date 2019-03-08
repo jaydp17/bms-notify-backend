@@ -8,6 +8,8 @@ provider:
 functions:
   hello:
     handler: handler.graphql
+  cities:
+    handler: src/cities/index.handler
 
 plugins:
   - serverless-appsync-plugin
@@ -24,7 +26,7 @@ custom:
     mappingTemplates:
       - dataSource: awsLambdaDataSource
         type: Query
-        field: hello
+        field: cities
         request: hello-request-mapping-template.txt
         response: hello-response-mapping-template.txt
     schema: # defaults schema.graphql
@@ -34,7 +36,7 @@ custom:
         name: awsLambdaDataSource
         description: 'Lambda DataSource'
         config:
-          functionName: hello # The function name in your serverless.yml. Ignored if lambdaFunctionArn is provided.
+          functionName: cities # The function name in your serverless.yml. Ignored if lambdaFunctionArn is provided.
           serviceRoleArn: { Fn::GetAtt: [AppSyncLambdaServiceRole, Arn] } # Where AppSyncLambdaServiceRole is an IAM role defined in Resources
 
 resources:

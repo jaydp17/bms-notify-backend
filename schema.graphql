@@ -1,5 +1,10 @@
 type Query {
-  hello(key: String): String!
+  cities: [City!]!
+  hello: String!
+}
+
+type City {
+  name: String!
 }
 
 schema {
