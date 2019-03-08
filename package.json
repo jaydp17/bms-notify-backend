@@ -7,7 +7,9 @@
   },
   "devDependencies": {
     "serverless": "^1.38.0",
+    "serverless-appsync-offline": "^1.1.2",
     "serverless-appsync-plugin": "^1.1.0",
+    "serverless-offline": "^4.8.1",
     "serverless-pseudo-parameters": "^2.4.0"
   },
   "homepage": "https://github.com/jaydp17/bms-notify-backend#readme",
@@ -19,7 +21,11 @@
     "type": "git",
     "url": "git+https://github.com/jaydp17/bms-notify-backend.git"
   },
+  "resolutions": {
+    "nan": "^2.12.1",
+    "node-gyp": "^3.8.0"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "sls offline start"
   }
 }

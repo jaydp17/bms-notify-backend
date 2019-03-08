@@ -12,8 +12,12 @@ functions:
 plugins:
   - serverless-appsync-plugin
   - serverless-pseudo-parameters
+  - serverless-appsync-offline
+  - serverless-offline
 
 custom:
+  appsync-offline:
+    port: 62222
   appSync:
     name: bms-notify
     authenticationType: API_KEY

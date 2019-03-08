@@ -3,7 +3,6 @@
     "operation": "Invoke",
     "payload": {
         "field": "hello",
-        "arguments":  $utils.toJson($context.arguments),
-        "handle" : $utils.toJson($context.identity.username)
+        "arguments": $utils.toJson($context.arguments)
     }
 }
