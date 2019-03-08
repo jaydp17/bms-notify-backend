@@ -7,4 +7,55 @@ provider:
 
 functions:
   hello:
-    handler: handler.hello
+    handler: handler.graphql
+
+plugins:
+  - serverless-appsync-plugin
+  - serverless-pseudo-parameters
+
+custom:
+  appSync:
+    name: bms-notify
+    authenticationType: API_KEY
+    mappingTemplates:
+      - dataSource: awsLambdaDataSource
+        type: Query
+        field: hello
+        request: hello-request-mapping-template.txt
+        response: hello-response-mapping-template.txt
+    schema: # defaults schema.graphql
+    serviceRole: AppSyncServiceRole
+    dataSources:
+      - type: AWS_LAMBDA
+        name: awsLambdaDataSource
+        description: 'Lambda DataSource'
+        config:
+          functionName: hello # The function name in your serverless.yml. Ignored if lambdaFunctionArn is provided.
+          serviceRoleArn: { Fn::GetAtt: [AppSyncLambdaServiceRole, Arn] } # Where AppSyncLambdaServiceRole is an IAM role defined in Resources
+
+resources:
+  Resources:
+    # AppSync lambda role
+    AppSyncLambdaServiceRole:
+      Type: 'AWS::IAM::Role'
+      Properties:
+        RoleName: 'Lambda-${self:custom.appSync.serviceRole}'
+        AssumeRolePolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+            - Effect: 'Allow'
+              Principal:
+                Service:
+                  - 'appsync.amazonaws.com'
+              Action:
+                - 'sts:AssumeRole'
+        Policies:
+          - PolicyName: 'Lambda-${self:custom.appSync.serviceRole}-Policy'
+            PolicyDocument:
+              Version: '2012-10-17'
+              Statement:
+                - Effect: 'Allow'
+                  Action:
+                    - 'lambda:invokeFunction'
+                  Resource:
+                    - 'arn:aws:lambda:#{AWS::Region}:#{AWS::AccountId}:function:${self:service}-*'
