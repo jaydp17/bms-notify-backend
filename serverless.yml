@@ -1,0 +1,10 @@
+service: bms-notify
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  region: ap-south-1
+
+functions:
+  hello:
+    handler: handler.hello

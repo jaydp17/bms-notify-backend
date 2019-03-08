@@ -5,6 +5,9 @@
   "bugs": {
     "url": "https://github.com/jaydp17/bms-notify-backend/issues"
   },
+  "devDependencies": {
+    "serverless": "^1.38.0"
+  },
   "homepage": "https://github.com/jaydp17/bms-notify-backend#readme",
   "keywords": [],
   "license": "MIT",
