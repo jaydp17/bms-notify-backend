@@ -6,11 +6,24 @@
     "url": "https://github.com/jaydp17/bms-notify-backend/issues"
   },
   "devDependencies": {
+    "@babel/core": "^7.3.4",
+    "@babel/plugin-proposal-object-rest-spread": "^7.3.4",
+    "@babel/preset-env": "^7.3.4",
+    "@babel/preset-typescript": "^7.3.3",
+    "babel-loader": "^8.0.5",
+    "babel-plugin-lodash": "^3.3.4",
     "serverless": "^1.38.0",
     "serverless-appsync-offline": "^1.1.2",
     "serverless-appsync-plugin": "^1.1.0",
     "serverless-offline": "^4.8.1",
-    "serverless-pseudo-parameters": "^2.4.0"
+    "serverless-pseudo-parameters": "^2.4.0",
+    "serverless-webpack": "^5.2.0",
+    "terser-webpack-plugin": "^1.2.3",
+    "tsconfig-paths-webpack-plugin": "^3.2.0",
+    "typescript": "3.3.3333",
+    "typescript-tslint-plugin": "^0.3.1",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.2.3"
   },
   "homepage": "https://github.com/jaydp17/bms-notify-backend#readme",
   "keywords": [],
@@ -26,6 +39,7 @@
     "node-gyp": "^3.8.0"
   },
   "scripts": {
-    "dev": "sls offline start"
+    "dev": "sls offline start",
+    "debug": "NODE_DEBUG=appsync-emulator:* node --inspect ./node_modules/.bin/sls offline start"
   }
 }

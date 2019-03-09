@@ -11,15 +11,27 @@ functions:
   cities:
     handler: src/cities/index.handler
 
+package:
+  individually: true
+
 plugins:
+  - serverless-webpack
   - serverless-appsync-plugin
   - serverless-pseudo-parameters
   - serverless-appsync-offline
   - serverless-offline
 
 custom:
+  webpack:
+    packager: 'yarn' # Defaults to npm
+  appsync-emulator:
+    buildPrefix: .webpack/service
   appsync-offline:
     port: 62222
+    dynamodb:
+      client:
+        # if endpoint is provided, no local database server is started and and appsync connects to the endpoint - e.g. serverless-dynamodb-local
+        endpoint: "http://localhost:8000"
   appSync:
     name: bms-notify
     authenticationType: API_KEY
