@@ -1,0 +1,9 @@
+package.json
+node_modules
+tsconfig*
+packages/*/dist/**
+packages/*/.webpack/**
+packages/*/.serverless/**
+*package.json
+*package-lock.json
+*webpack-stats.json

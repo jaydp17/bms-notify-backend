@@ -13,9 +13,9 @@ module.exports = isProd => {
 
       plugins: [
         new TsconfigPathsPlugin({
-          configFile: path.join(process.cwd(), 'tsconfig.json')
-        })
-      ]
+          configFile: path.join(process.cwd(), 'tsconfig.json'),
+        }),
+      ],
     },
     devtool: isProd ? 'source-map' : 'cheap-module-eval-source-map',
     mode: isProd ? 'production' : 'development',
@@ -24,7 +24,7 @@ module.exports = isProd => {
     output: {
       libraryTarget: 'commonjs2',
       path: path.join(process.cwd(), '.webpack'),
-      filename: '[name].js'
+      filename: '[name].js',
     },
     module: {
       rules: [
@@ -35,15 +35,15 @@ module.exports = isProd => {
           options: {
             configFile: path.join(__dirname, './.babelrc'),
             cacheDirectory: true,
-            cacheCompression: false
-          }
-        }
-      ]
+            cacheCompression: false,
+          },
+        },
+      ],
     },
     optimization: {
       // the below makes sure webpack doesn't touch NODE_ENV
       // because the default behavior for webpack is to set NODE_ENV = 'development' | 'production' depending on the mode at compile time
-      nodeEnv: false
+      nodeEnv: false,
       // minimize: false,
       // concatenateModules: false,
     },
@@ -56,9 +56,9 @@ module.exports = isProd => {
     plugins: [
       new webpack.DefinePlugin({
         'process.env.IS_OFFLINE': JSON.stringify(!isProd),
-        'process.env.IS_LOCAL': JSON.stringify(!isProd)
-      })
-    ]
+        'process.env.IS_LOCAL': JSON.stringify(!isProd),
+      }),
+    ],
     // stats: isProd ? 'normal' : 'minimal',
   };
   if (isProd) {
@@ -69,10 +69,10 @@ module.exports = isProd => {
         sourceMap: true,
         terserOptions: {
           output: {
-            comments: false
-          }
-        }
-      })
+            comments: false,
+          },
+        },
+      }),
     ];
   }
 

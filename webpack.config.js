@@ -5,7 +5,7 @@ const isProd = !slsw.lib.webpack.isLocal;
 const rootWebpackConfig = getRootWebpackConfig(isProd);
 const config = {
   ...rootWebpackConfig,
-  entry: slsw.lib.entries
+  entry: slsw.lib.entries,
 };
 
 module.exports = config;

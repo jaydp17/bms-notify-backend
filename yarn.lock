@@ -6217,6 +6217,11 @@ prepend-http@^1.0.1:
   resolved "https://registry.yarnpkg.com/prepend-http/-/prepend-http-1.0.4.tgz#d4f4562b0ce3696e41ac52d0e002e57a635dc6dc"
   integrity sha1-1PRWKwzjaW5BrFLQ4ALlemNdxtw=
 
+prettier@1.16.4:
+  version "1.16.4"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.16.4.tgz#73e37e73e018ad2db9c76742e2647e21790c9717"
+  integrity sha512-ZzWuos7TI5CKUeQAtFd6Zhm2s6EpAD/ZLApIhsF9pRvRtM1RFo61dM/4MSRUA0SuLugA/zgrZD8m0BaY46Og7g==
+
 private@^0.1.6:
   version "0.1.8"
   resolved "https://registry.yarnpkg.com/private/-/private-0.1.8.tgz#2381edb3689f7a53d653190060fcf822d2f368ff"
@@ -7024,11 +7029,6 @@ serverless-offline@^4.8.1:
     jsonwebtoken "^8.5.0"
     trim-newlines "^2.0.0"
     velocityjs "^1.1.3"
-
-serverless-plugin-tracer@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/serverless-plugin-tracer/-/serverless-plugin-tracer-1.0.0.tgz#0706241e1db106e163e2852ff491a67b2f612f88"
-  integrity sha512-Bdd0sUGElRgL1FqEMXuQB2AZJmdJGwUNk9ZkOe6DjmK0W8ZTemcIKFJ6+ufjMeNCuwsbTjJSnEhXX0aJUNx5jQ==
 
 serverless-pseudo-parameters@^2.4.0:
   version "2.4.0"
