@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+
 const slsw = require('serverless-webpack');
 const getRootWebpackConfig = require('./webpack.base.config');
 
