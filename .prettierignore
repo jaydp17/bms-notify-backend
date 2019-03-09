@@ -7,3 +7,4 @@ packages/*/.serverless/**
 *package.json
 *package-lock.json
 *webpack-stats.json
+.serverless

@@ -31,7 +31,7 @@ custom:
     dynamodb:
       client:
         # if endpoint is provided, no local database server is started and and appsync connects to the endpoint - e.g. serverless-dynamodb-local
-        endpoint: "http://localhost:8000"
+        endpoint: 'http://localhost:8000'
   appSync:
     name: bms-notify
     authenticationType: API_KEY
