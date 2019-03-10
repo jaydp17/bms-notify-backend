@@ -1,13 +1,15 @@
 import { DynamoDB } from 'aws-sdk';
 import { dynamodb } from '../dynamodb';
 import { prettyPrint } from '../helpers';
-import { regionsTableSpec } from '../tables';
+import { regionsTable } from '../tables';
 
 async function createTable(tableSchema: DynamoDB.Types.CreateTableInput) {
   try {
+    prettyPrint(tableSchema);
     const result = await dynamodb.createTable(tableSchema).promise();
     prettyPrint(result);
   } catch (err) {
+    console.error(err);
     if (err.code !== 'ResourceInUseException') {
       throw err;
     }
@@ -15,7 +17,7 @@ async function createTable(tableSchema: DynamoDB.Types.CreateTableInput) {
 }
 
 async function main() {
-  await createTable(regionsTableSpec);
+  await createTable(regionsTable);
 }
 
 main()

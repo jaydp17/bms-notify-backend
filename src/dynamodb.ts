@@ -6,6 +6,7 @@ let dynamoDbOptions: DynamoDB.ClientConfiguration = { region: 'ap-south-1' };
 if (env === 'development') {
   dynamoDbOptions = { ...dynamoDbOptions, endpoint: 'http://localhost:8000' };
 }
+console.log({ dynamoDbOptions });
 
 export const dynamodb = new DynamoDB(dynamoDbOptions);
 const dynamoDocClient = new DynamoDB.DocumentClient(dynamoDbOptions);
@@ -16,4 +17,6 @@ export default {
   query: (params: DocumentClient.QueryInput) => dynamoDocClient.query(params).promise(),
   delete: (params: DocumentClient.DeleteItemInput) => dynamoDocClient.delete(params).promise(),
   scan: (params: DocumentClient.ScanInput) => dynamoDocClient.scan(params).promise(),
+  batchWrite: (params: DocumentClient.BatchWriteItemInput) =>
+    dynamoDocClient.batchWrite(params).promise(),
 };

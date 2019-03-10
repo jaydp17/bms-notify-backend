@@ -4,3 +4,6 @@ node_modules
 # Serverless directories
 .serverless
 .webpack
+
+# dynamodb local data
+.dynamodb

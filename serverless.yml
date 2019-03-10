@@ -9,7 +9,16 @@ functions:
   hello:
     handler: handler.graphql
   regions:
-    handler: src/regions/index.handler
+    handler: src/resolvers/regions/index.handler
+  # crons
+  update-regions:
+    handler: src/crons/update-regions/index.handler
+    description: A cron that fetches regions from BMS and puts it in dynamodb
+    events:
+      - schedule:
+          name: bms-notify-update-regions-cron-${self:provider.stage}
+          description: A cron that fetches regions from BMS and puts it in dynamodb
+          rate: rate(7 days)
 
 package:
   individually: true

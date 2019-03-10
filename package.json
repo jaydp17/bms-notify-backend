@@ -6,13 +6,16 @@
     "url": "https://github.com/jaydp17/bms-notify-backend/issues"
   },
   "dependencies": {
-    "aws-sdk": "^2.418.0"
+    "aws-sdk": "^2.418.0",
+    "axios": "^0.18.0",
+    "lodash": "^4.17.11"
   },
   "devDependencies": {
     "@babel/core": "^7.3.4",
     "@babel/plugin-proposal-object-rest-spread": "^7.3.4",
     "@babel/preset-env": "^7.3.4",
     "@babel/preset-typescript": "^7.3.3",
+    "@types/lodash": "^4.14.122",
     "@typescript-eslint/eslint-plugin": "^1.4.2",
     "@typescript-eslint/parser": "^1.4.2",
     "babel-loader": "^8.0.5",
@@ -71,6 +74,7 @@
     "dev": "sls offline start",
     "eslint-check": "eslint --print-config . | eslint-config-prettier-check",
     "format": "prettier --write '**/*.{js,ts,json,yaml,yml,md}'",
+    "invoke:local": "sls invoke local --log -f",
     "lint": "eslint --ext '.ts,.js'--fix .",
     "ts-run": "ts-node --compiler-options '{\"module\": \"commonjs\", \"target\":\"es2015\"}'",
     "type-check": "tsc"

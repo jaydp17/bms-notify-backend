@@ -12,12 +12,6 @@ module.exports = isProd => {
       // webpack defaults to `module` and `main`, but that's
       // not really what node.js supports, so we reset it
       mainFields: ['main'],
-
-      plugins: [
-        new TsconfigPathsPlugin({
-          configFile: path.join(process.cwd(), 'tsconfig.json'),
-        }),
-      ],
     },
     devtool: isProd ? 'source-map' : 'cheap-module-eval-source-map',
     mode: isProd ? 'production' : 'development',

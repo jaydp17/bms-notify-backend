@@ -8,7 +8,10 @@
 # install deps
 $ yarn
 
-# run locally
+# run dynamodb
+$ ./shell-scripts/run-dynamodb.sh
+
+# run graphql server
 $ yarn dev
 
 # query graphql
