@@ -11,7 +11,8 @@ $ yarn
 # run dynamodb
 $ ./shell-scripts/run-dynamodb.sh
 
-# run graphql server
+# run graphql server on port 62222
+# & the graphql playground on port 3000
 $ yarn dev
 
 # query graphql

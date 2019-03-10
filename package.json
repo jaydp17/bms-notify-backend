@@ -71,11 +71,13 @@
   },
   "scripts": {
     "debug": "NODE_DEBUG=appsync-emulator:* node --inspect ./node_modules/.bin/sls offline start",
-    "dev": "sls offline start",
+    "dev": "run-p --print-label offline-start graphql-playground",
     "eslint-check": "eslint --print-config . | eslint-config-prettier-check",
     "format": "prettier --write '**/*.{js,ts,json,yaml,yml,md}'",
+    "graphql-playground": "sls graphql-playground",
     "invoke:local": "sls invoke local --log -f",
     "lint": "eslint --ext '.ts,.js'--fix .",
+    "offline-start": "sls offline start",
     "ts-run": "ts-node --compiler-options '{\"module\": \"commonjs\", \"target\":\"es2015\"}'",
     "type-check": "tsc"
   }
