@@ -1,10 +1,12 @@
 type Query {
-  cities: [City!]!
+  regions: [Region!]!
   hello: String!
 }
 
-type City {
+type Region {
+  code: String!
   name: String!
+  isTopCity: Boolean!
 }
 
 schema {

@@ -43,7 +43,7 @@
   "license": "MIT",
   "lint-staged": {
     "*.{ts,js}": [
-      "eslint --fix",
+      "eslint --config .eslintrc.js --fix",
       "prettier --write",
       "git add"
     ],
@@ -67,7 +67,7 @@
     "dev": "sls offline start",
     "eslint-check": "eslint --print-config . | eslint-config-prettier-check",
     "format": "prettier --write '**/*.{js,ts,json,yaml,yml,md}'",
-    "lint": "eslint --fix .",
+    "lint": "eslint --ext '.ts,.js'--fix .",
     "type-check": "tsc"
   }
 }
