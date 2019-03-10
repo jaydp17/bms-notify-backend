@@ -1,7 +1,10 @@
-import { getRegions, Region } from '../../bookmyshow/api';
+import { Region } from '../../bookmyshow/api';
+import { dynamoClient } from '../../dynamodb';
+import { regionsTable } from '../../tables';
 
-export const handler = async (event: any): Promise<Region[]> => {
-  console.log('Received event {}', __dirname, JSON.stringify(event, null, 4));
-
-  return getRegions();
+export const handler = async (): Promise<Region[]> => {
+  const scanOutput = await dynamoClient.scan({
+    TableName: regionsTable.TableName,
+  });
+  return scanOutput.Items as Region[];
 };

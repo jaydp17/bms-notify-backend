@@ -1,7 +1,7 @@
 import { DocumentClient } from 'aws-sdk/clients/dynamodb';
 import _ from 'lodash';
 import { Region } from '../bookmyshow/api';
-import dynamoClient from '../dynamodb';
+import { dynamoClient } from '../dynamodb';
 import { regionsTable } from '../tables';
 
 export async function writeRegions(regions: Region[]) {

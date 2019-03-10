@@ -11,7 +11,7 @@ console.log({ dynamoDbOptions });
 export const dynamodb = new DynamoDB(dynamoDbOptions);
 const dynamoDocClient = new DynamoDB.DocumentClient(dynamoDbOptions);
 
-export default {
+export const dynamoClient = {
   get: (params: DocumentClient.GetItemInput) => dynamoDocClient.get(params).promise(),
   put: (params: DocumentClient.PutItemInput) => dynamoDocClient.put(params).promise(),
   query: (params: DocumentClient.QueryInput) => dynamoDocClient.query(params).promise(),
