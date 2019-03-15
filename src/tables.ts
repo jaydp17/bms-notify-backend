@@ -22,3 +22,16 @@ export const cinemasTable: DynamoDB.Types.CreateTableInput = {
   ],
   BillingMode: 'PAY_PER_REQUEST',
 };
+
+export const moviesTable: DynamoDB.Types.CreateTableInput = {
+  TableName: getFullTableName('movies'),
+  KeySchema: [
+    { AttributeName: 'regionCode', KeyType: 'HASH' },
+    { AttributeName: 'groupCode', KeyType: 'RANGE' },
+  ],
+  AttributeDefinitions: [
+    { AttributeName: 'regionCode', AttributeType: 'S' },
+    { AttributeName: 'groupCode', AttributeType: 'S' },
+  ],
+  BillingMode: 'PAY_PER_REQUEST',
+};

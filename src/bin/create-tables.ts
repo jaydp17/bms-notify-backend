@@ -1,7 +1,7 @@
 import { DynamoDB } from 'aws-sdk';
 import { dynamodb } from '../dynamodb';
 import { prettyPrint } from '../helpers';
-import { cinemasTable, regionsTable } from '../tables';
+import { cinemasTable, regionsTable, moviesTable } from '../tables';
 
 async function createTable(tableSchema: DynamoDB.Types.CreateTableInput) {
   try {
@@ -35,9 +35,11 @@ async function addTTL2Table(tableName: string, attributeName: string = 'ttl') {
 }
 
 async function main() {
-  await createTable(regionsTable);
-  await createTable(cinemasTable);
+  const tables = [regionsTable, cinemasTable, moviesTable];
+  await Promise.all(tables.map(createTable));
+
   await addTTL2Table(cinemasTable.TableName);
+  await addTTL2Table(moviesTable.TableName);
 }
 
 main()

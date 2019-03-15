@@ -36,7 +36,7 @@ export async function getRegions(): Promise<Region[]> {
   ];
 }
 
-export async function getQuickBookInfo(cityCode: string) {
+export async function getQuickBookInfo(regionCode: string) {
   const axiosOptions: AxiosRequestConfig = {
     method: 'GET',
     url: `https://in.bookmyshow.com/serv/getData`,
@@ -47,12 +47,14 @@ export async function getQuickBookInfo(cityCode: string) {
     },
     headers: {
       'User-Agent': userAgent,
-      Cookie: `Rgn=|Code=${cityCode}|`,
+      Cookie: `Rgn=|Code=${regionCode}|`,
     },
   };
   const response: { data: BmsQuickBookResponse } = await axios(axiosOptions);
   const cinemas = response.data.cinemas.BookMyShow.aiVN.map(mapToCinema);
-  const movies = response.data.moviesData.BookMyShow.arrEvents.map(mapToMovie);
+  const movies = response.data.moviesData.BookMyShow.arrEvents.map(movie =>
+    mapToMovie(movie, regionCode),
+  );
   return { cinemas, movies };
 }
 
@@ -74,8 +76,9 @@ function mapToCinema(cinema: BmsQuickBookCinema): Cinema {
   };
 }
 
-function mapToMovie(movie: BmsQuickBookMovie): Movie {
+function mapToMovie(movie: BmsQuickBookMovie, regionCode: string): Movie {
   return {
+    regionCode,
     code: movie.EventCode,
     groupCode: movie.EventGroup,
     name: movie.EventTitle,

@@ -4,6 +4,7 @@ import { getQuickBookInfo } from '../../bookmyshow/api';
 import { dynamoClient, paginate } from '../../dynamodb';
 import { Cinema, writeCinemas } from '../../models/cinemas';
 import { cinemasTable } from '../../tables';
+import { writeMovies } from '../../models/movies';
 
 interface Event {
   arguments: {
@@ -35,6 +36,6 @@ async function getCinemasFromDb(regionCode: string) {
 async function getCinemasFromBMS(regionCode: string) {
   // TODO: store movies as well along with TTL
   const { cinemas, movies } = await getQuickBookInfo(regionCode);
-  await writeCinemas(cinemas);
+  await Promise.all([writeCinemas(cinemas), writeMovies(movies)]);
   return cinemas;
 }
