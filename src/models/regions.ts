@@ -1,11 +1,13 @@
 import { DocumentClient } from 'aws-sdk/clients/dynamodb';
 import _ from 'lodash';
-import { dynamoClient } from '../dynamodb';
+import { dynamoClient, MAX_BATCH_WRITE_ITEMS } from '../dynamodb';
 import { regionsTable } from '../tables';
 
 export async function writeRegions(regions: Region[]) {
-  const chunks = _.chunk(regions, 25);
-  const promises = chunks.map(getChunkBatchWriteInput).map(dynamoClient.batchWrite);
+  const chunks = _.chunk(regions, MAX_BATCH_WRITE_ITEMS);
+  const promises = chunks
+    .map(getChunkBatchWriteInput)
+    .map(writeChunk => dynamoClient.batchWrite(writeChunk).promise());
   return Promise.all(promises);
 }
 

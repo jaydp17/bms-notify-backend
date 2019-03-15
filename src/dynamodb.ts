@@ -1,5 +1,6 @@
-import { DynamoDB } from 'aws-sdk';
+import { AWSError, DynamoDB } from 'aws-sdk';
 import { DocumentClient } from 'aws-sdk/lib/dynamodb/document_client';
+import { Request } from 'aws-sdk/lib/request';
 import { env } from './environment';
 
 let dynamoDbOptions: DynamoDB.ClientConfiguration = { region: 'ap-south-1' };
@@ -9,14 +10,24 @@ if (env === 'development') {
 console.log({ dynamoDbOptions });
 
 export const dynamodb = new DynamoDB(dynamoDbOptions);
-const dynamoDocClient = new DynamoDB.DocumentClient(dynamoDbOptions);
+export const dynamoClient = new DynamoDB.DocumentClient(dynamoDbOptions);
 
-export const dynamoClient = {
-  get: (params: DocumentClient.GetItemInput) => dynamoDocClient.get(params).promise(),
-  put: (params: DocumentClient.PutItemInput) => dynamoDocClient.put(params).promise(),
-  query: (params: DocumentClient.QueryInput) => dynamoDocClient.query(params).promise(),
-  delete: (params: DocumentClient.DeleteItemInput) => dynamoDocClient.delete(params).promise(),
-  scan: (params: DocumentClient.ScanInput) => dynamoDocClient.scan(params).promise(),
-  batchWrite: (params: DocumentClient.BatchWriteItemInput) =>
-    dynamoDocClient.batchWrite(params).promise(),
-};
+export const MAX_BATCH_WRITE_ITEMS = 25;
+
+export async function paginate<T>(
+  request: Request<DocumentClient.ScanOutput, AWSError>,
+): Promise<T[]> {
+  const items: T[] = [];
+  return new Promise((resolve, reject) => {
+    request.eachPage((err, data) => {
+      if (err) {
+        reject(err);
+      } else if (data) {
+        if (data.Items) items.push(...(data.Items as T[]));
+      } else {
+        resolve(items);
+      }
+      return true;
+    });
+  });
+}
