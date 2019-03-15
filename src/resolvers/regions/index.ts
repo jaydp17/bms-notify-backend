@@ -1,5 +1,5 @@
-import { Region } from '../../bookmyshow/api';
 import { dynamoClient } from '../../dynamodb';
+import { Region } from '../../models/regions';
 import { regionsTable } from '../../tables';
 
 export const handler = async (): Promise<Region[]> => {

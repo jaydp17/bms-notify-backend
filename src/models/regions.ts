@@ -1,6 +1,5 @@
 import { DocumentClient } from 'aws-sdk/clients/dynamodb';
 import _ from 'lodash';
-import { Region } from '../bookmyshow/api';
 import { dynamoClient } from '../dynamodb';
 import { regionsTable } from '../tables';
 
@@ -20,4 +19,10 @@ function getChunkBatchWriteInput(regionChunk: Region[]) {
     },
   };
   return params;
+}
+
+export interface Region {
+  code: string;
+  name: string;
+  isTopCity: boolean;
 }
