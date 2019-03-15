@@ -1,5 +1,6 @@
 type Query {
   regions: [Region!]!
+  cinemas: [Cinema!]!
   hello: String!
 }
 
@@ -7,6 +8,14 @@ type Region {
   code: String!
   name: String!
   isTopCity: Boolean!
+}
+
+type Cinema {
+  code: String!
+  companyCode: String!
+  name: String!
+  address: String!
+  regionCode: String!
 }
 
 schema {

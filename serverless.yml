@@ -10,6 +10,8 @@ functions:
     handler: handler.graphql
   regions:
     handler: src/resolvers/regions/index.handler
+  cinemas:
+    handler: src/resolvers/cinemas/index.handler
   # crons
   update-regions:
     handler: src/crons/update-regions/index.handler
@@ -45,19 +47,30 @@ custom:
     name: bms-notify
     authenticationType: API_KEY
     mappingTemplates:
-      - dataSource: awsLambdaDataSource
+      - dataSource: regionsDataSource
         type: Query
         field: regions
+        request: hello-request-mapping-template.txt
+        response: hello-response-mapping-template.txt
+      - dataSource: cinemasDataSource
+        type: Query
+        field: cinemas
         request: hello-request-mapping-template.txt
         response: hello-response-mapping-template.txt
     schema: # defaults schema.graphql
     serviceRole: AppSyncServiceRole
     dataSources:
       - type: AWS_LAMBDA
-        name: awsLambdaDataSource
+        name: regionsDataSource
         description: 'Lambda DataSource'
         config:
           functionName: regions # The function name in your serverless.yml. Ignored if lambdaFunctionArn is provided.
+          serviceRoleArn: { Fn::GetAtt: [AppSyncLambdaServiceRole, Arn] } # Where AppSyncLambdaServiceRole is an IAM role defined in Resources
+      - type: AWS_LAMBDA
+        name: cinemasDataSource
+        description: 'Lambda DataSource'
+        config:
+          functionName: cinemas # The function name in your serverless.yml. Ignored if lambdaFunctionArn is provided.
           serviceRoleArn: { Fn::GetAtt: [AppSyncLambdaServiceRole, Arn] } # Where AppSyncLambdaServiceRole is an IAM role defined in Resources
 
 resources:
