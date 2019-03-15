@@ -5,8 +5,13 @@ import { dynamoClient, paginate } from '../../dynamodb';
 import { Cinema, writeCinemas } from '../../models/cinemas';
 import { cinemasTable } from '../../tables';
 
-export const handler = async (): Promise<Cinema[]> => {
-  const regionCode = 'BANG';
+interface Event {
+  arguments: {
+    regionCode: string;
+  };
+}
+export const handler = async (event: Event): Promise<Cinema[]> => {
+  const { regionCode } = event.arguments;
   const cinemasFromDb = await getCinemasFromDb(regionCode);
   if (!_.isEmpty(cinemasFromDb)) {
     return cinemasFromDb;

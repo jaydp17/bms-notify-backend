@@ -1,6 +1,6 @@
 type Query {
   regions: [Region!]!
-  cinemas: [Cinema!]!
+  cinemas(regionCode: String!): [Cinema!]!
   hello: String!
 }
 
