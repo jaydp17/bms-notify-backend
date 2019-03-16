@@ -30,6 +30,7 @@
     "serverless": "^1.38.0",
     "serverless-appsync-offline": "^1.1.2",
     "serverless-appsync-plugin": "^1.1.0",
+    "serverless-dotenv-plugin": "^2.0.1",
     "serverless-offline": "^4.8.1",
     "serverless-pseudo-parameters": "^2.4.0",
     "serverless-webpack": "^5.2.0",

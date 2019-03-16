@@ -7,3 +7,9 @@ node_modules
 
 # dynamodb local data
 .dynamodb
+
+# env files
+.env
+.env.dev
+.env.staging
+.env.production

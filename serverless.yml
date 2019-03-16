@@ -50,6 +50,7 @@ plugins:
   - serverless-pseudo-parameters
   - serverless-appsync-offline
   - serverless-offline
+  - serverless-dotenv-plugin
 
 custom:
   stage: ${opt:stage, self:provider.stage}
@@ -63,8 +64,11 @@ custom:
       client:
         # if endpoint is provided, no local database server is started and and appsync connects to the endpoint - e.g. serverless-dynamodb-local
         endpoint: 'http://localhost:8000'
+  dotenv:
+    include:
+      - NODE_ENV
   appSync:
-    name: bms-notify
+    name: bms-notify.${self:custom.stage}
     authenticationType: API_KEY
     mappingTemplates:
       - dataSource: regionsDataSource
