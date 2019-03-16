@@ -1,5 +1,7 @@
 import axios, { AxiosRequestConfig } from 'axios';
-import addHours from 'date-fns/add_hours';
+import addMinutes from 'date-fns/add_minutes';
+import { QUICKBOOK_CACHE_MINUTES } from '../dynamodb';
+import { getEpoch } from '../helpers';
 import { Cinema } from '../models/cinemas';
 import { Movie } from '../models/movies';
 import { Region } from '../models/regions';
@@ -52,7 +54,7 @@ export async function getQuickBookInfo(regionCode: string) {
     },
   };
   const response: { data: BmsQuickBookResponse } = await axios(axiosOptions);
-  const ttl = Math.round(addHours(new Date(), 1).getTime() / 1000);
+  const ttl = getEpoch(addMinutes(new Date(), QUICKBOOK_CACHE_MINUTES));
   const cinemas = response.data.cinemas.BookMyShow.aiVN.map(cinema => mapToCinema(cinema, ttl));
   const movies = response.data.moviesData.BookMyShow.arrEvents.map(movie =>
     mapToMovie(movie, regionCode, ttl),

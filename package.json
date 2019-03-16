@@ -76,7 +76,7 @@
     "dev": "run-p --print-label offline-start graphql-playground",
     "eslint-check": "eslint --print-config . | eslint-config-prettier-check",
     "format": "prettier --write '**/*.{js,ts,json,yaml,yml,md}'",
-    "graphql-playground": "sls graphql-playground",
+    "graphql-playground": "sls graphql-playground --apiKey abc",
     "invoke:local": "sls invoke local --log -f",
     "lint": "eslint --ext '.ts,.js'--fix .",
     "offline-start": "sls offline start",

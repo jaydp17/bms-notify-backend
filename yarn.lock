@@ -1381,10 +1381,25 @@ atob@^2.1.1:
   resolved "https://registry.yarnpkg.com/atob/-/atob-2.1.2.tgz#6d9517eb9e030d2436666651e86bd9f6f13533c9"
   integrity sha512-Wm6ukoaOGJi/73p/cl2GvLjTI5JM1k/O14isD73YML8StrH/7/lRFgmg8nICZgD3bZZvjwCGxtMOD3wWNAu8cg==
 
-aws-sdk@^2.238.1, aws-sdk@^2.254.1, aws-sdk@^2.313.0, aws-sdk@^2.373.0, aws-sdk@^2.404.0, aws-sdk@^2.418.0:
+aws-sdk@^2.238.1, aws-sdk@^2.254.1, aws-sdk@^2.373.0, aws-sdk@^2.404.0, aws-sdk@^2.418.0:
   version "2.418.0"
   resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.418.0.tgz#840c4562c28fc63e99a9195a4644d0021f5b3e35"
   integrity sha512-15aCtqqCsiyMW+CDwo6Fq3V5jDzpgb5//aPMosL+5FQnQu65t2GiLidcIPx4fWvsYpRiE/i4enz3a0Kqtt2acQ==
+  dependencies:
+    buffer "4.9.1"
+    events "1.1.1"
+    ieee754 "1.1.8"
+    jmespath "0.15.0"
+    querystring "0.2.0"
+    sax "1.2.1"
+    url "0.10.3"
+    uuid "3.3.2"
+    xml2js "0.4.19"
+
+aws-sdk@^2.313.0:
+  version "2.422.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.422.0.tgz#d875ca4098ced6f47d466f4c7addf8a79332651f"
+  integrity sha512-t/hUQcRVhbw3EPS84d7YqwIAMSXHT5V/s6m0ivgLjIXnzRng0qRD1KGTkoLkXnY+X/o/NdvVIIfLfO4VF8xqMw==
   dependencies:
     buffer "4.9.1"
     events "1.1.1"
@@ -3969,9 +3984,9 @@ graphql-iso-date@^3.6.1:
   resolved "https://registry.yarnpkg.com/graphql-iso-date/-/graphql-iso-date-3.6.1.tgz#bd2d0dc886e0f954cbbbc496bbf1d480b57ffa96"
   integrity sha512-AwFGIuYMJQXOEAgRlJlFL4H1ncFM8n8XmoVDTNypNOZyQ8LFDG2ppMFlsS862BSTCDcSUfHp8PD3/uJhv7t59Q==
 
-"graphql-phone-type@https://github.com/pianomansam/graphql-phone-type":
+"graphql-phone-type@git+https://github.com/pianomansam/graphql-phone-type.git":
   version "0.0.2"
-  resolved "https://github.com/pianomansam/graphql-phone-type#daaa07a9705b8a4669acd5f98a599ab443cb31d6"
+  resolved "git+https://github.com/pianomansam/graphql-phone-type.git#daaa07a9705b8a4669acd5f98a599ab443cb31d6"
   dependencies:
     libphonenumber-js "^0.4.43"
 

@@ -1,7 +1,7 @@
 import { AWSError, DynamoDB } from 'aws-sdk';
 import { DocumentClient } from 'aws-sdk/lib/dynamodb/document_client';
 import { Request } from 'aws-sdk/lib/request';
-import { env } from './environment';
+import { env, isDev } from './environment';
 
 let dynamoDbOptions: DynamoDB.ClientConfiguration = { region: 'ap-south-1' };
 if (env === 'development') {
@@ -31,3 +31,5 @@ export async function paginate<T>(
     });
   });
 }
+
+export const QUICKBOOK_CACHE_MINUTES = isDev ? 360 : 20;
