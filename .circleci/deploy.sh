@@ -11,5 +11,5 @@ if [ ! -z "$SERVERLESS_STAGE" ]; then
   # tools like babel/terser use it as cache (./node_modules/.cache/) if it exists
   mkdir -p node_modules;
   export NODE_OPTIONS="--max-old-space-size=4096";
-  SLS_DEBUG=* ../../node_modules/.bin/sls deploy --stage $SERVERLESS_STAGE --verbose
+  SLS_DEBUG=* ./node_modules/.bin/sls deploy --stage $SERVERLESS_STAGE --verbose
 fi
