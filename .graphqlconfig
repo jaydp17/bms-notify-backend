@@ -1,0 +1,13 @@
+{
+  "schemaPath": "schema.graphql",
+  "extensions": {
+    "endpoints": {
+      "local": {
+        "url": "http://localhost:62222/graphql",
+        "headers": {
+          "x-api-key": "abc"
+        }
+      }
+    }
+  }
+}

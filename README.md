@@ -4,6 +4,8 @@
 
 ## Usage
 
+Run the server locally
+
 ```sh
 # install deps
 $ yarn
@@ -12,7 +14,6 @@ $ yarn
 $ ./shell-scripts/run-dynamodb.sh
 
 # run graphql server on port 62222
-# & the graphql playground on port 3000
 $ yarn dev
 
 # query graphql
@@ -24,3 +25,11 @@ $ curl -X POST \
 	"query": "{ hello }"
 }'
 ```
+
+Install [graphql-playground](https://github.com/prisma/graphql-playground) if you don't have.
+
+```sh
+$ brew cask install graphql-playground
+```
+
+Now just open the project root in graphql-playground
