@@ -29,4 +29,5 @@ export interface Cinema {
   name: string;
   address: string;
   regionCode: string;
+  ttl: number;
 }

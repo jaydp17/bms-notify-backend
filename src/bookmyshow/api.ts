@@ -1,4 +1,5 @@
 import axios, { AxiosRequestConfig } from 'axios';
+import addHours from 'date-fns/add_hours';
 import { Cinema } from '../models/cinemas';
 import { Movie } from '../models/movies';
 import { Region } from '../models/regions';
@@ -51,9 +52,10 @@ export async function getQuickBookInfo(regionCode: string) {
     },
   };
   const response: { data: BmsQuickBookResponse } = await axios(axiosOptions);
-  const cinemas = response.data.cinemas.BookMyShow.aiVN.map(mapToCinema);
+  const ttl = Math.round(addHours(new Date(), 1).getTime() / 1000);
+  const cinemas = response.data.cinemas.BookMyShow.aiVN.map(cinema => mapToCinema(cinema, ttl));
   const movies = response.data.moviesData.BookMyShow.arrEvents.map(movie =>
-    mapToMovie(movie, regionCode),
+    mapToMovie(movie, regionCode, ttl),
   );
   return { cinemas, movies };
 }
@@ -66,17 +68,18 @@ function mapToRegion(bmsRegion: BmsRegion, isTopCity: boolean): Region {
   };
 }
 
-function mapToCinema(cinema: BmsQuickBookCinema): Cinema {
+function mapToCinema(cinema: BmsQuickBookCinema, ttl: number): Cinema {
   return {
     code: cinema.VenueCode,
     companyCode: cinema.CompanyCode,
     name: cinema.VenueName,
     address: cinema.VenueAddress,
     regionCode: cinema.VenueSubRegionCode,
+    ttl,
   };
 }
 
-function mapToMovie(movie: BmsQuickBookMovie, regionCode: string): Movie {
+function mapToMovie(movie: BmsQuickBookMovie, regionCode: string, ttl: number): Movie {
   return {
     regionCode,
     code: movie.EventCode,
@@ -85,5 +88,6 @@ function mapToMovie(movie: BmsQuickBookMovie, regionCode: string): Movie {
     slug: movie.EventURLTitle,
     avgRating: movie.avgRating,
     totalVotes: movie.totalVotes,
+    ttl,
   };
 }

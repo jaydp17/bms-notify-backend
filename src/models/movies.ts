@@ -31,4 +31,5 @@ export interface Movie {
   slug: string;
   avgRating: number;
   totalVotes: number;
+  ttl: number;
 }
