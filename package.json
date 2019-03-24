@@ -73,7 +73,7 @@
   },
   "scripts": {
     "debug": "NODE_DEBUG=appsync-emulator:* node --inspect ./node_modules/.bin/sls offline start",
-    "dev": "sls offline start",
+    "dev": "sls offline start --corsAllowOrigin '*'",
     "eslint-check": "eslint --print-config . | eslint-config-prettier-check",
     "format": "prettier --write '**/*.{js,ts,json,yaml,yml,md}'",
     "graphql-playground": "sls graphql-playground --apiKey abc",
