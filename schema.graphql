@@ -4,6 +4,10 @@ type Query {
   movies(regionCode: String!): [Movie!]!
 }
 
+type Mutation {
+  subscribeMovieAtCinema(regionCode: String!, cinemaCode: String!, movieCode: String!): String!
+}
+
 type Region {
   code: String!
   name: String!
@@ -30,4 +34,5 @@ type Movie {
 
 schema {
   query: Query
+  mutation: Mutation
 }
