@@ -10,13 +10,17 @@ interface Event {
 }
 
 const vapidPublicKey =
-  'BCsVNqXbivH1MD3Sa2rRWqTyr-cmPG0cHfWni9cpY5lwDaVH41e5Om01yf9fsQVXVq8Y4Xe2nvwmDB6CWJsI8vY';
-const vapidPrivateKey = '0pGJgwPyv2wA1-vwTv3aAOP9PkrD3UFvfkQnqhr5ldo';
-
-webpush.setVapidDetails('https://bms-notify.jaydp.com', vapidPublicKey, vapidPrivateKey);
+  'BOGGgGGFu6Vtq_w_2JRqFak_3-JjtdG02lco32frBCMjat7Vg-SkGjJz5EeM3KMTxE5lC9HzYOxEu_3o4zC6xYs';
 
 export const handler = async (event: Event) => {
   console.log('event', event);
+  const vapidPrivateKey = process.env.VAPID_PRIVATE_KEY;
+  if (!vapidPrivateKey) {
+    console.log('env var VAPID_PRIVATE_KEY not passed');
+    throw new Error('env var VAPID_PRIVATE_KEY not passed');
+  }
+  webpush.setVapidDetails('https://bms-notify.jaydp.com', vapidPublicKey, vapidPrivateKey);
+
   const payload = JSON.stringify({ title: 'Push test' });
   const { subscription } = event.arguments;
   const result = await webpush.sendNotification(subscription, payload);

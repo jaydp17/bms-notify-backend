@@ -68,9 +68,6 @@ custom:
         endpoint: 'http://localhost:8000'
   serverless-offline:
     port: 3452 # this port is useless, thus it's given a random number
-  dotenv:
-    include:
-      - NODE_ENV
   appSync:
     name: bms-notify.${self:custom.stage}
     authenticationType: API_KEY
