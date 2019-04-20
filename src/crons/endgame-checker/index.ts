@@ -37,5 +37,3 @@ export const handler = async () => {
     return Promise.reject(error);
   }
 };
-
-handler();
