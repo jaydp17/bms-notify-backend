@@ -5,7 +5,12 @@ type Query {
 }
 
 type Mutation {
-  subscribeMovieAtCinema(regionCode: String!, cinemaCode: String!, movieCode: String!): String!
+  subscribeMovieAtCinema(
+    regionCode: String!
+    cinemaCode: String!
+    movieCode: String!
+    subscription: PushSubscriptionInput!
+  ): String!
 }
 
 type Region {
@@ -30,6 +35,17 @@ type Movie {
   slug: String!
   avgRating: Int
   totalVotes: Int
+}
+
+input PushSubscriptionInput {
+  endpoint: String!
+  expirationTime: String
+  keys: PushSubscriptionKeysInput!
+}
+
+input PushSubscriptionKeysInput {
+  auth: String!
+  p256dh: String!
 }
 
 schema {
