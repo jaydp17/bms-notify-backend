@@ -1,6 +1,6 @@
 import { DocumentClient } from 'aws-sdk/clients/dynamodb';
 import _ from 'lodash';
-import { getQuickBookInfo } from '../../bookmyshow/api';
+import { getComingSoonMovies, getQuickBookInfo } from '../../bookmyshow/api';
 import { dynamoClient, paginate } from '../../dynamodb';
 import { getEpoch } from '../../helpers';
 import { Cinema, writeCinemas } from '../../models/cinemas';
@@ -45,7 +45,10 @@ async function getCinemasFromDb(regionCode: string) {
 
 async function getCinemasFromBMS(regionCode: string) {
   console.log('fetching from BMS');
-  const { cinemas, movies } = await getQuickBookInfo(regionCode);
-  await Promise.all([writeCinemas(cinemas), writeMovies(movies)]);
+  const [{ cinemas, movies }, comingSoonMovies] = await Promise.all([
+    getQuickBookInfo(regionCode),
+    getComingSoonMovies(regionCode),
+  ]);
+  await Promise.all([writeCinemas(cinemas), writeMovies([...movies, ...comingSoonMovies])]);
   return cinemas;
 }
