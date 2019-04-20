@@ -1,6 +1,6 @@
 import { DocumentClient } from 'aws-sdk/clients/dynamodb';
 import _ from 'lodash';
-import { getQuickBookInfo } from '../../bookmyshow/api';
+import { getQuickBookInfo, getComingSoonMovies } from '../../bookmyshow/api';
 import { dynamoClient, paginate } from '../../dynamodb';
 import { writeCinemas } from '../../models/cinemas';
 import { Movie, writeMovies } from '../../models/movies';
@@ -34,8 +34,10 @@ async function getMoviesFromDb(regionCode: string) {
 }
 
 async function getMoviesFromBMS(regionCode: string) {
-  // TODO: store movies as well along with TTL
-  const { cinemas, movies } = await getQuickBookInfo(regionCode);
-  await Promise.all([writeCinemas(cinemas), writeMovies(movies)]);
+  const [{ cinemas, movies }, comingSoonMovies] = await Promise.all([
+    getQuickBookInfo(regionCode),
+    getComingSoonMovies(regionCode),
+  ]);
+  await Promise.all([writeCinemas(cinemas), writeMovies([...movies, ...comingSoonMovies])]);
   return movies;
 }

@@ -44,6 +44,23 @@ export interface BmsQuickBookResponse {
   };
 }
 
+export interface BmsComingSoonResposne {
+  BookMyShow: {
+    page: {
+      prev: number;
+      current: number;
+      next: number;
+      total: number;
+    };
+    filters: {
+      arrLanguages: string[];
+      arrGenre: string[];
+      arrYearandMonth: string[];
+    };
+    Events: BmsComingSoonMovie[];
+  };
+}
+
 export interface BmsQuickBookCinema {
   VenueCode: string; // eg. 'ENNR'
   CompanyCode: string; // eg. 'MOAM'
@@ -76,4 +93,30 @@ export interface BmsQuickBookMovie {
   IsPremiere: YesNo;
   avgRating: number; // eg. 83
   totalVotes: number; // eg. 48011
+}
+
+export interface BmsComingSoonMovie {
+  EventCode: string; // eg. 'ET00090482'
+  ImageCode: string; // eg. 'avengers-end-game-et00090482-07-12-2018-06-50-21'
+  EventGroupCode: string; // eg. 'EG00068832'
+  EventDimension: string; // eg. '2D'
+  EventTitle: string; // eg. 'Avengers: Endgame'
+  EventType: string; // eg. 'MT'
+  Ratings: string; // eg. '0'
+  Actors: string; // eg. 'Chris Evans,Robert Downey Jr.,Chris Hemsworth'
+  Director: string; // eg. 'Anthony Russo,Joe Russo'
+  Genre: string; // eg. 'Action,Adventure,Fantasy'
+  GenreArray: string[]; // eg. ["Action","Adventure","Fantasy"]
+  Language: string; // eg. 'English, Hindi, Tamil, Telugu'
+  LanguageArray: string[]; // eg. ["English","Hindi","Tamil","Telugu"]
+  Length: string; // eg. '3 hrs 2 mins'
+  TrailerURL: string; // eg. https://www.youtube.com/watch?v=TcMBFSGVi1c&feature=youtu.be
+  Seq: string; // eg. '50'
+  EventSynopsis: string; // eg. 'The grave course of events set in motion by Thanos that wiped out half the universe and fractured the Avengers ranks compels the remaining Avengers to take one final stand in Marvel Studios' grand conclusion to twenty-two films, "Avengers: Endgame."'
+  EventReleaseDate: string; // eg. '26th Apr 2019'
+  ReleaseDateCode: string; // eg. '20190426'
+  BannerURL: string; // eg. 'https://in.bmscdn.com/Events/Mobile/ET00090482.jpg?dtm=20190420'
+  IsComingSoon: 'Y' | 'N';
+  DimensionArray: string[]; // eg. ["2D","2D 4DX","3D","3D 4DX","IMAX 2D","IMAX 3D"]
+  FShareURL: string; // eg. 'http://in.bookmyshow.com/movies/Avengers-Endgame/ET00090482'
 }

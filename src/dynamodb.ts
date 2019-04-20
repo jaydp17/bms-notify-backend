@@ -33,3 +33,4 @@ export async function paginate<T>(
 }
 
 export const QUICKBOOK_CACHE_MINUTES = isDev ? 360 : 20;
+export const COMING_SOON_CACHE_MINUTES = QUICKBOOK_CACHE_MINUTES;

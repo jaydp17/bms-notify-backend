@@ -11,6 +11,20 @@
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run-script", "debug"],
       "port": 9229
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "TS run currentFile",
+      "runtimeArgs": ["-r", "ts-node/register", "-r", "tsconfig-paths/register"],
+      "args": ["${relativeFile}"],
+      "cwd": "${workspaceFolder}",
+      "outputCapture": "std",
+      "envFile": "${workspaceFolder}/.env",
+      "env": {
+        "TS_NODE_PROJECT": "tsconfig.json",
+        "TS_NODE_COMPILER_OPTIONS": "{\"module\": \"commonjs\", \"target\":\"es2015\"}"
+      }
     }
   ]
 }
