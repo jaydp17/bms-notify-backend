@@ -42,6 +42,14 @@ functions:
           name: bms-notify-update-regions-cron-${self:custom.stage}
           description: A cron that fetches regions from BMS and puts it in dynamodb
           rate: rate(7 days)
+  endgame-checker:
+    handler: src/crons/endgame-checker/index.handler
+    description: A cron that checks if Avengers Endgame is available in my favorite cinemas
+    events:
+      - schedule:
+          name: bms-notify-endgame-checker-cron-${self:custom.stage}
+          description: A cron that checks if Avengers Endgame is available in my favorite cinemas
+          rate: rate(15 minutes)
 
 package:
   individually: true

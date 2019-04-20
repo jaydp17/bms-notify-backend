@@ -13,10 +13,13 @@ import {
   BmsQuickBookResponse,
   BmsRegion,
   BmsRegionListResponse,
+  BmsShowTimesResponse,
 } from './types';
 
 const userAgent =
   'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36';
+const okhttpUserAgent = 'okhttp/3.11.0';
+const token = '67x1xa33b4x422b361ba';
 
 export async function getRegions(): Promise<Region[]> {
   const axiosOptions: AxiosRequestConfig = {
@@ -26,7 +29,7 @@ export async function getRegions(): Promise<Region[]> {
       cmd: 'DEREGIONLIST',
       f: 'json',
       et: 'ALL',
-      t: '67x1xa33b4x422b361ba',
+      t: token,
       ch: 'mobile',
     },
     headers: {
@@ -77,7 +80,7 @@ export async function getComingSoonMovies(regionCode: string) {
     params: {
       cmd: 'COMINGSOON',
       rc: regionCode,
-      t: '67x1xa33b4x422b361ba',
+      t: token,
       pg: 1,
       cnt: 1000,
       yy: year,
@@ -93,6 +96,34 @@ export async function getComingSoonMovies(regionCode: string) {
     mapToMovieComingSoon(movie, regionCode, ttl),
   );
   return movies;
+}
+
+/**
+ *
+ * @param dateStr - eg '20190426'
+ */
+export async function getAvailableVenueCodes(
+  childEventCode: string,
+  regionCode: string,
+  dateStr: string,
+) {
+  const axiosOptions: AxiosRequestConfig = {
+    method: 'GET',
+    url: 'https://in.bookmyshow.com/api/v2/mobile/showtimes/byevent',
+    params: {
+      regionCode,
+      eventCode: childEventCode,
+      token,
+      bmsId: '1.82650383.1552055894719', // TODO: find out what this is?
+      dateCode: dateStr,
+    },
+    headers: { 'User-Agent': okhttpUserAgent },
+  };
+  const response: { data: BmsShowTimesResponse } = await axios(axiosOptions);
+  const showDetail = response.data.ShowDetails[0];
+  if (!showDetail) return [];
+  const availableVenueCodes = showDetail.Venues.map(venue => venue.VenueCode);
+  return availableVenueCodes;
 }
 
 function mapToRegion(bmsRegion: BmsRegion, isTopCity: boolean): Region {

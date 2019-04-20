@@ -61,6 +61,14 @@ export interface BmsComingSoonResposne {
   };
 }
 
+export interface BmsShowTimesResponse {
+  ShowDetails: {
+    Date: string; // eg. '20190426'
+    Event: BmsShowTimeEvent;
+    Venues: BmsShowTimeVenue[];
+  }[];
+}
+
 export interface BmsQuickBookCinema {
   VenueCode: string; // eg. 'ENNR'
   CompanyCode: string; // eg. 'MOAM'
@@ -116,7 +124,79 @@ export interface BmsComingSoonMovie {
   EventReleaseDate: string; // eg. '26th Apr 2019'
   ReleaseDateCode: string; // eg. '20190426'
   BannerURL: string; // eg. 'https://in.bmscdn.com/Events/Mobile/ET00090482.jpg?dtm=20190420'
-  IsComingSoon: 'Y' | 'N';
+  IsComingSoon: YesNo;
   DimensionArray: string[]; // eg. ["2D","2D 4DX","3D","3D 4DX","IMAX 2D","IMAX 3D"]
   FShareURL: string; // eg. 'http://in.bookmyshow.com/movies/Avengers-Endgame/ET00090482'
+}
+export interface BmsShowTimeEvent {
+  EventTitle: string; // eg. 'Avengers: Endgame'
+  EventGroup: string; // eg. 'EG00068832'
+  ChildEvents: BmsShowTimeChildEvent[];
+}
+export interface BmsShowTimeChildEvent {
+  EventCode: string; // eg. 'ET00100559'
+  EventTitle: string; // eg. 'Avengers: Endgame (3D)'
+  EventType: string; // eg. 'MT'
+  EventLang: string; // eg. 'English'
+  EventName: string; // eg. 'Avengers: Endgame (3D) - English'
+  EventGenre: string; // eg. 'Action|Adventure|Fantasy'
+  EventDimension: string; // eg. '3D' or 'IMAX 3D'
+  EventIsAtmosEnabled: YesNo;
+}
+export interface BmsShowTimeVenue {
+  VenueCode: string; // eg. 'INMB'
+  VenueName: string; // eg. 'INOX: Mantri Square, Malleshwaram'
+  VenueAdd: string; // eg. 'Mantri Square Mall, Sampige Road, Malleswaram, Bengaluru, Karnataka 560052, India'
+  VenueApp: string; // eg. 'SB'
+  SubRegSeq: string; // eg. '1'
+  CouponIsAllowed: YesNo;
+  AllowSales: YesNo;
+  Lng: string; // eg. '77.5703'
+  ShowSeatNo: YesNo;
+  SessCount: string; // eg. '124'
+  SubRegCode: string; // eg. 'BANG'
+  SubRegName: string; // eg. 'BANG'
+  TicketCancellation: YesNo;
+  UnpaidReleaseCutOff: string; // eg. '1 hr'
+  CinemaCodFlag: YesNo;
+  IsFullLayout: YesNo;
+  ETicket: YesNo;
+  MTicket: YesNo;
+  BestSeatsAvail: YesNo; // 🤔 ?
+  CoupleSeats: YesNo;
+  CompCode: string; // eg. 'INOX'
+  ShowTimes: BmsShowTime[];
+}
+
+export interface BmsShowTime {
+  ShowDateTime: string; // eg. '201904261045'
+  MinPrice: string; // eg. '397.00';
+  EventCode: string; // eg. 'ET00100668';
+  BestAvailableSeats: number; // eg. 0;
+  Availability: string; // eg. 'A';
+  ShowTime: string; // eg. '10:45 AM';
+  ShowDateCode: string; // eg. '20190426';
+  SessionUnpaidFlag: YesNo;
+  CoupleSeats: YesNo;
+  SessionUnpaidQuota: string; // eg. '0';
+  IsAtmosEnabled: YesNo;
+  MaxPrice: string; // eg. '397.00';
+  ApplicablePriceFilters: string[]; // eg. ['pf5'];
+  ShowTimeCode: string; // eg. '1045';
+  Categories: BmsShowTimeCategory[];
+}
+
+export interface BmsShowTimeCategory {
+  PercentAvail: string; // eg. '1';
+  PriceCode: string; // eg. 'CL';
+  AdditionalData: string; // eg. '0';
+  CurPrice: string; // eg. '397.00';
+  AreaCatCode: string; // eg. 'CL';
+  MaxSeats: string; // eg. '246';
+  BestAvailableSeats: string; // eg. '0';
+  SeatLayout: YesNo; // eg. 'Y';
+  PriceDesc: string; // eg. 'Club';
+  SeatsAvail: string; // eg. '2';
+  CategoryRange: string; // eg. '';
+  intCategoryMaxTickets: string; // eg. '2';
 }
