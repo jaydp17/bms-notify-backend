@@ -5,7 +5,7 @@ import { getWebPush } from '../../webpush';
 const regionCode = 'BANG';
 const endgameEventCode3D = 'ET00100559';
 const venuesOfChoice = [
-  'CXBL', // spirit
+  // 'CXBL', // spirit
   'PVBN', // forum mall, koramangala
 ];
 
