@@ -1,21 +1,19 @@
-import { PushSubscription } from 'web-push';
-import { getWebPush } from '../../webpush';
-
-interface Event {
-  arguments: {
-    regionCode: string;
-    cinemaCode: string;
-    movieCode: string;
-    subscription: PushSubscription;
-  };
-}
+import { addSubscription } from '../../models/subscriptions';
+import { Event } from './types';
+import { validateRequest } from './validations';
 
 export const handler = async (event: Event) => {
-  console.log('event', event);
-  const payload = JSON.stringify({ title: 'Push test' });
-  const { subscription } = event.arguments;
-  const webpush = getWebPush();
-  const result = await webpush.sendNotification(subscription, payload);
-  console.log('result', result);
-  return 'subscribed :)';
+  try {
+    console.log('event', event);
+    validateRequest(event);
+    // const payload = JSON.stringify({ title: 'Push test' });
+    // const webpush = getWebPush();
+    // const result = await webpush.sendNotification(subscription, payload);
+    const subscriptionParams = event.arguments;
+    const subscription = await addSubscription(subscriptionParams);
+    return subscription;
+  } catch (error) {
+    console.error(error);
+    throw error.message;
+  }
 };

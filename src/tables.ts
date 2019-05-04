@@ -35,3 +35,16 @@ export const moviesTable: DynamoDB.Types.CreateTableInput = {
   ],
   BillingMode: 'PAY_PER_REQUEST',
 };
+
+export const subscriptionsTable: DynamoDB.Types.CreateTableInput = {
+  TableName: getFullTableName('subscriptions'),
+  KeySchema: [
+    { AttributeName: 'webPushSubscription', KeyType: 'HASH' },
+    { AttributeName: 'uuid', KeyType: 'RANGE' },
+  ],
+  AttributeDefinitions: [
+    { AttributeName: 'webPushSubscription', AttributeType: 'S' },
+    { AttributeName: 'uuid', AttributeType: 'S' },
+  ],
+  BillingMode: 'PAY_PER_REQUEST',
+};

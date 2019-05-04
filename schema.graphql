@@ -9,8 +9,9 @@ type Mutation {
     regionCode: String!
     cinemaCode: String!
     movieCode: String!
-    subscription: PushSubscriptionInput!
-  ): String!
+    dateStr: String!
+    webPushSubscription: PushSubscriptionInput!
+  ): Subscription!
 }
 
 type Region {
@@ -46,6 +47,15 @@ input PushSubscriptionInput {
 input PushSubscriptionKeysInput {
   auth: String!
   p256dh: String!
+}
+
+type Subscription {
+  uuid: String!
+  regionCode: String!
+  cinemaCode: String!
+  movieCode: String!
+  dateStr: String!
+  webPushSubscription: String!
 }
 
 schema {
