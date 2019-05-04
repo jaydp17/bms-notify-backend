@@ -1,0 +1,55 @@
+- type: AWS_LAMBDA
+  name: DS_All_Regions
+  description: 'Fetches all regions'
+  config:
+    functionName: all_regions # The function name in your serverless.yml. Ignored if lambdaFunctionArn is provided.
+    serviceRoleArn: { Fn::GetAtt: [AppSyncLambdaServiceRole, Arn] } # Where AppSyncLambdaServiceRole is an IAM role defined in Resources
+
+- type: AWS_LAMBDA
+  name: DS_Region_From_Code
+  description: 'Converts a region code to a Region object'
+  config:
+    functionName: region_from_code
+    serviceRoleArn: { Fn::GetAtt: [AppSyncLambdaServiceRole, Arn] }
+
+- type: AWS_LAMBDA
+  name: DS_All_Cinemas
+  description: 'Fetches all cinemas in a region'
+  config:
+    functionName: all_cinemas
+    serviceRoleArn: { Fn::GetAtt: [AppSyncLambdaServiceRole, Arn] }
+
+- type: AWS_LAMBDA
+  name: DS_Cinema_From_Code
+  description: 'Converts a cinema code to a Cinema object'
+  config:
+    functionName: cinema_from_code
+    serviceRoleArn: { Fn::GetAtt: [AppSyncLambdaServiceRole, Arn] }
+
+- type: AWS_LAMBDA
+  name: DS_All_Movies
+  description: 'Fetches all movies in a region'
+  config:
+    functionName: all_movies
+    serviceRoleArn: { Fn::GetAtt: [AppSyncLambdaServiceRole, Arn] }
+
+- type: AWS_LAMBDA
+  name: DS_Movie_From_Code
+  description: 'Converts a movie code to a Movie object'
+  config:
+    functionName: movie_from_code
+    serviceRoleArn: { Fn::GetAtt: [AppSyncLambdaServiceRole, Arn] }
+
+- type: AWS_LAMBDA
+  name: DS_Subscribe_Movie_At_Cinema
+  description: 'Mutation to subscribe a movie at a cinema'
+  config:
+    functionName: subscribeMovieAtCinema
+    serviceRoleArn: { Fn::GetAtt: [AppSyncLambdaServiceRole, Arn] }
+
+- type: AWS_LAMBDA
+  name: DS_My_Subscriptions
+  description: 'Returns subscriptions using web push subscription object'
+  config:
+    functionName: mySubscriptions
+    serviceRoleArn: { Fn::GetAtt: [AppSyncLambdaServiceRole, Arn] }

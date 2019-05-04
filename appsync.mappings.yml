@@ -1,0 +1,47 @@
+- type: Query
+  field: regions
+  dataSource: DS_All_Regions
+  request: with-args.request.vtl
+  response: to-json.response.vtl
+
+- type: MovieSubscription
+  field: region
+  dataSource: DS_Region_From_Code
+  request: Subscription_region.request.vtl
+  response: to-json.response.vtl
+
+- type: Query
+  field: cinemas
+  dataSource: DS_All_Cinemas
+  request: with-args.request.vtl
+  response: to-json.response.vtl
+
+- type: MovieSubscription
+  field: cinema
+  dataSource: DS_Cinema_From_Code
+  request: Subscription_cinema.request.vtl
+  response: to-json.response.vtl
+
+- type: Query
+  field: movies
+  dataSource: DS_All_Movies
+  request: with-args.request.vtl
+  response: to-json.response.vtl
+
+- type: MovieSubscription
+  field: movie
+  dataSource: DS_Movie_From_Code
+  request: Subscription_movie.request.vtl
+  response: to-json.response.vtl
+
+- type: Mutation
+  field: subscribeMovieAtCinema
+  dataSource: DS_Subscribe_Movie_At_Cinema
+  request: with-args.request.vtl
+  response: to-json.response.vtl
+
+- type: Query
+  field: mySubscriptions
+  dataSource: DS_My_Subscriptions
+  request: with-args.request.vtl
+  response: to-json.response.vtl

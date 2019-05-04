@@ -79,98 +79,10 @@ custom:
   appSync:
     name: bms-notify.${self:custom.stage}
     authenticationType: API_KEY
-    mappingTemplates:
-      - dataSource: regionsDataSource
-        type: Query
-        field: regions
-        request: hello-request-mapping-template.txt
-        response: hello-response-mapping-template.txt
-      - dataSource: cinemasDataSource
-        type: Query
-        field: cinemas
-        request: hello-request-mapping-template.txt
-        response: hello-response-mapping-template.txt
-      - dataSource: moviesDataSource
-        type: Query
-        field: movies
-        request: hello-request-mapping-template.txt
-        response: hello-response-mapping-template.txt
-      - dataSource: mySubscriptionsDataSource
-        type: Query
-        field: mySubscriptions
-        request: hello-request-mapping-template.txt
-        response: hello-response-mapping-template.txt
-      - dataSource: subscribeFunction
-        type: Mutation
-        field: subscribeMovieAtCinema
-        request: hello-request-mapping-template.txt
-        response: hello-response-mapping-template.txt
-      - dataSource: RegionCode_to_Region
-        type: MovieSubscription
-        field: region
-        request: request-subscription_region.txt
-        response: hello-response-mapping-template.txt
-      - dataSource: CinemaCode_to_Cinema
-        type: MovieSubscription
-        field: cinema
-        request: request-subscription_cinema.vtl
-        response: response-to-json.vtl
-      - dataSource: MovieCode_to_Movie
-        type: MovieSubscription
-        field: movie
-        request: request-subscription_movie.vtl
-        response: response-to-json.vtl
+    dataSources: ${file(./appsync.datasources.yml)}
+    mappingTemplates: ${file(./appsync.mappings.yml)}
     schema: # defaults schema.graphql
     serviceRole: AppSyncServiceRole-${self:custom.stage}
-    dataSources:
-      - type: AWS_LAMBDA
-        name: regionsDataSource
-        description: 'Lambda DataSource'
-        config:
-          functionName: all_regions # The function name in your serverless.yml. Ignored if lambdaFunctionArn is provided.
-          serviceRoleArn: { Fn::GetAtt: [AppSyncLambdaServiceRole, Arn] } # Where AppSyncLambdaServiceRole is an IAM role defined in Resources
-      - type: AWS_LAMBDA
-        name: cinemasDataSource
-        description: 'Lambda DataSource'
-        config:
-          functionName: all_cinemas
-          serviceRoleArn: { Fn::GetAtt: [AppSyncLambdaServiceRole, Arn] }
-      - type: AWS_LAMBDA
-        name: moviesDataSource
-        description: 'Lambda DataSource'
-        config:
-          functionName: all_movies
-          serviceRoleArn: { Fn::GetAtt: [AppSyncLambdaServiceRole, Arn] }
-      - type: AWS_LAMBDA
-        name: mySubscriptionsDataSource
-        description: 'Lambda DataSource'
-        config:
-          functionName: mySubscriptions
-          serviceRoleArn: { Fn::GetAtt: [AppSyncLambdaServiceRole, Arn] }
-      - type: AWS_LAMBDA
-        name: RegionCode_to_Region
-        description: 'Converts a region code to a Region object'
-        config:
-          functionName: region_from_code
-          serviceRoleArn: { Fn::GetAtt: [AppSyncLambdaServiceRole, Arn] }
-      - type: AWS_LAMBDA
-        name: CinemaCode_to_Cinema
-        description: 'Converts a cinema code to a Cinema object'
-        config:
-          functionName: cinema_from_code
-          serviceRoleArn: { Fn::GetAtt: [AppSyncLambdaServiceRole, Arn] }
-      - type: AWS_LAMBDA
-        name: MovieCode_to_Movie
-        description: 'Converts a movie code to a Movie object'
-        config:
-          functionName: movie_from_code
-          serviceRoleArn: { Fn::GetAtt: [AppSyncLambdaServiceRole, Arn] }
-      - type: AWS_LAMBDA
-        name: subscribeFunction
-        description: 'Lambda function to subscribe'
-        config:
-          functionName: subscribeMovieAtCinema
-          serviceRoleArn: { Fn::GetAtt: [AppSyncLambdaServiceRole, Arn] }
 
 resources:
   Resources:
