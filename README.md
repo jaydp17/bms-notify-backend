@@ -36,5 +36,5 @@ Now just open the project root in graphql-playground
 
 ## TODO
 
-- [ ] add pino logger
 - [ ] add a handlerWrap for every handler
+- [ ] should code be the HASH key in cinema & movies? or not? confusion

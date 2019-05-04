@@ -3,6 +3,9 @@ import { dynamoClient, paginate } from '../dynamodb';
 import { Cinema } from '../models/cinemas';
 import { Movie } from '../models/movies';
 import { cinemasTable, moviesTable } from '../tables';
+import { getLoggerInstance } from '../utils/logger';
+
+const logger = getLoggerInstance();
 
 async function main() {
   await clearMovies();
@@ -42,5 +45,5 @@ async function clearCinemas() {
 }
 
 main()
-  .then(() => console.log('done!'))
-  .catch(err => console.error('error', err));
+  .then(() => logger.info('done!'))
+  .catch(err => logger.error(err, 'error'));

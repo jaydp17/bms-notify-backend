@@ -1,13 +1,15 @@
 import { DynamoDB } from 'aws-sdk';
 import { dynamodb } from '../dynamodb';
-import { prettyPrint } from '../utils/helpers';
 import { cinemasTable, moviesTable, regionsTable, subscriptionsTable } from '../tables';
+import { getLoggerInstance } from '../utils/logger';
+
+const logger = getLoggerInstance();
 
 async function createTable(tableSchema: DynamoDB.Types.CreateTableInput) {
   try {
-    prettyPrint(tableSchema);
+    logger.info(tableSchema, 'table schema');
     const result = await dynamodb.createTable(tableSchema).promise();
-    prettyPrint(result);
+    logger.info(result, 'result');
   } catch (err) {
     console.error(err);
     if (err.code !== 'ResourceInUseException') {
@@ -43,5 +45,5 @@ async function main() {
 }
 
 main()
-  .then(() => console.log('done!'))
-  .catch(err => console.error('error', err));
+  .then(() => logger.info('done!'))
+  .catch(err => logger.error(err, 'error'));

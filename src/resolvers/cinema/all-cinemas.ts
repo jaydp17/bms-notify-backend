@@ -2,10 +2,13 @@ import { DocumentClient } from 'aws-sdk/clients/dynamodb';
 import _ from 'lodash';
 import { getComingSoonMovies, getQuickBookInfo } from '../../bookmyshow/api';
 import { dynamoClient, paginate } from '../../dynamodb';
-import { getEpoch } from '../../utils/helpers';
 import { Cinema, writeCinemas } from '../../models/cinemas';
 import { writeMovies } from '../../models/movies';
 import { cinemasTable } from '../../tables';
+import { getEpoch } from '../../utils/helpers';
+import { getLoggerInstance } from '../../utils/logger';
+
+const logger = getLoggerInstance();
 
 interface Event {
   arguments: {
@@ -44,7 +47,7 @@ async function getCinemasFromDb(regionCode: string) {
 }
 
 async function getCinemasFromBMS(regionCode: string) {
-  console.log('fetching from BMS');
+  logger.info('fetching from BMS');
   const [{ cinemas, movies }, comingSoonMovies] = await Promise.all([
     getQuickBookInfo(regionCode),
     getComingSoonMovies(regionCode),

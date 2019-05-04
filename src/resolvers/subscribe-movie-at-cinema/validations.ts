@@ -15,7 +15,6 @@ export function validateRequest(event: Event) {
 
   const now = new Date();
   const diffDays = differenceInCalendarDays(dateStr, now);
-  console.log('diffDays', diffDays);
   if (diffDays > 15) {
     throw new Error("you can't subscribe for a show more then 2 weeks in future");
   }

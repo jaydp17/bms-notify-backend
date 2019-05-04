@@ -4,7 +4,6 @@ import { validateRequest } from './validations';
 
 export const handler = async (event: Event) => {
   try {
-    console.log('event', event);
     validateRequest(event);
     // const payload = JSON.stringify({ title: 'Push test' });
     // const webpush = getWebPush();
