@@ -2,7 +2,7 @@ type Query {
   regions: [Region!]!
   cinemas(regionCode: String!): [Cinema!]!
   movies(regionCode: String!): [Movie!]!
-  mySubscriptions(webPushSubscription: PushSubscriptionInput!): [Subscription!]
+  mySubscriptions(webPushSubscription: PushSubscriptionInput!): [MovieSubscription!]
 }
 
 type Mutation {
@@ -12,7 +12,7 @@ type Mutation {
     movieCode: String!
     dateStr: String!
     webPushSubscription: PushSubscriptionInput!
-  ): Subscription!
+  ): MovieSubscription!
 }
 
 type Region {
@@ -50,9 +50,9 @@ input PushSubscriptionKeysInput {
   p256dh: String!
 }
 
-type Subscription {
+type MovieSubscription {
   uuid: String!
-  regionCode: String!
+  region: Region
   cinemaCode: String!
   movieCode: String!
   dateStr: String!

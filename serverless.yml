@@ -34,7 +34,9 @@ functions:
   subscribeMovieAtCinema:
     handler: src/resolvers/subscribe-movie-at-cinema/index.handler
   mySubscriptions:
-    handler: src/resolvers/my-subscriptions/index.handler
+    handler: src/resolvers/my-movie-subscriptions/index.handler
+  regioncodeToRegion:
+    handler: src/resolvers/regioncode-to-region/index.handler
   # crons
   update-regions:
     handler: src/crons/update-regions/index.handler
@@ -99,6 +101,11 @@ custom:
         field: subscribeMovieAtCinema
         request: hello-request-mapping-template.txt
         response: hello-response-mapping-template.txt
+      - dataSource: RegionCode_to_Region
+        type: MovieSubscription
+        field: region
+        request: request-subscription_region.txt
+        response: hello-response-mapping-template.txt
     schema: # defaults schema.graphql
     serviceRole: AppSyncServiceRole-${self:custom.stage}
     dataSources:
@@ -125,6 +132,12 @@ custom:
         description: 'Lambda DataSource'
         config:
           functionName: mySubscriptions
+          serviceRoleArn: { Fn::GetAtt: [AppSyncLambdaServiceRole, Arn] }
+      - type: AWS_LAMBDA
+        name: RegionCode_to_Region
+        description: 'Converts a region code to a Region object'
+        config:
+          functionName: regioncodeToRegion
           serviceRoleArn: { Fn::GetAtt: [AppSyncLambdaServiceRole, Arn] }
       - type: AWS_LAMBDA
         name: subscribeFunction
