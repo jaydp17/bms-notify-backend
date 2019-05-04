@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import addMinutes from 'date-fns/add_minutes';
 import { COMING_SOON_CACHE_MINUTES, QUICKBOOK_CACHE_MINUTES } from '../dynamodb';
-import { getEpoch } from '../helpers';
+import { getEpoch } from '../utils/helpers';
 import { Cinema } from '../models/cinemas';
 import { Movie } from '../models/movies';
 import { Region } from '../models/regions';

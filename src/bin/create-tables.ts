@@ -1,6 +1,6 @@
 import { DynamoDB } from 'aws-sdk';
 import { dynamodb } from '../dynamodb';
-import { prettyPrint } from '../helpers';
+import { prettyPrint } from '../utils/helpers';
 import { cinemasTable, moviesTable, regionsTable, subscriptionsTable } from '../tables';
 
 async function createTable(tableSchema: DynamoDB.Types.CreateTableInput) {

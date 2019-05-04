@@ -1,7 +1,7 @@
 import differenceInCalendarDays from 'date-fns/difference_in_calendar_days';
 import isFuture from 'date-fns/is_future';
 import { PushSubscription } from 'web-push';
-import { isYYYYMMDD } from '../../helpers';
+import { isYYYYMMDD } from '../../utils/helpers';
 import { Event } from './types';
 
 export function validateRequest(event: Event) {

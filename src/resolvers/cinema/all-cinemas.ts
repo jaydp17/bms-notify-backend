@@ -2,7 +2,7 @@ import { DocumentClient } from 'aws-sdk/clients/dynamodb';
 import _ from 'lodash';
 import { getComingSoonMovies, getQuickBookInfo } from '../../bookmyshow/api';
 import { dynamoClient, paginate } from '../../dynamodb';
-import { getEpoch } from '../../helpers';
+import { getEpoch } from '../../utils/helpers';
 import { Cinema, writeCinemas } from '../../models/cinemas';
 import { writeMovies } from '../../models/movies';
 import { cinemasTable } from '../../tables';
