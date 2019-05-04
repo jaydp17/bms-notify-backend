@@ -19,11 +19,24 @@ export async function addSubscription(subscriptionRawData: AddSubscriptionInput)
     uuid,
   };
   const params: DocumentClient.PutItemInput = {
-    Item: subscription,
     TableName: subscriptionsTable.TableName,
+    Item: subscription,
   };
   await dynamoClient.put(params).promise();
   return subscription;
+}
+
+export async function getSubscriptions(webPushSubscriptionStr: string) {
+  const params: DocumentClient.QueryInput = {
+    TableName: subscriptionsTable.TableName,
+    KeyConditionExpression: 'webPushSubscription = :hkey',
+    ExpressionAttributeValues: {
+      ':hkey': webPushSubscriptionStr,
+    },
+  };
+  const queryResult = await dynamoClient.query(params).promise();
+  if (!queryResult.Items) return [];
+  return queryResult.Items as Subscription[];
 }
 
 export interface Subscription {

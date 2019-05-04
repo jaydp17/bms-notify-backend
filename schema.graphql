@@ -2,6 +2,7 @@ type Query {
   regions: [Region!]!
   cinemas(regionCode: String!): [Cinema!]!
   movies(regionCode: String!): [Movie!]!
+  mySubscriptions(webPushSubscription: PushSubscriptionInput!): [Subscription!]
 }
 
 type Mutation {
