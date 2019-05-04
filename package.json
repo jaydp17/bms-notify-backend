@@ -74,8 +74,7 @@
   },
   "resolutions": {
     "nan": "^2.12.1",
-    "node-gyp": "^3.8.0",
-    "fsevents": "^1.2.9"
+    "node-gyp": "^3.8.0"
   },
   "scripts": {
     "debug": "NODE_DEBUG=appsync-emulator:* node --inspect ./node_modules/.bin/sls offline start",
