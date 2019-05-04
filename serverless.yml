@@ -25,18 +25,22 @@ provider:
             - 'table/bms-notify-${self:custom.stage}.*'
 
 functions:
-  regions:
-    handler: src/resolvers/regions/index.handler
-  cinemas:
-    handler: src/resolvers/cinemas/index.handler
-  movies:
-    handler: src/resolvers/movies/index.handler
+  all_regions:
+    handler: src/resolvers/region/all-regions.handler
+  region_from_code:
+    handler: src/resolvers/region/from-region-code.handler
+  all_cinemas:
+    handler: src/resolvers/cinema/all-cinemas.handler
+  cinema_from_code:
+    handler: src/resolvers/cinema/from-cinema-code.handler
+  all_movies:
+    handler: src/resolvers/movie/all-movies.handler
+  movie_from_code:
+    handler: src/resolvers/movie/from-movie-code.handler
   subscribeMovieAtCinema:
     handler: src/resolvers/subscribe-movie-at-cinema/index.handler
   mySubscriptions:
     handler: src/resolvers/my-movie-subscriptions/index.handler
-  regioncodeToRegion:
-    handler: src/resolvers/regioncode-to-region/index.handler
   # crons
   update-regions:
     handler: src/crons/update-regions/index.handler
@@ -106,6 +110,16 @@ custom:
         field: region
         request: request-subscription_region.txt
         response: hello-response-mapping-template.txt
+      - dataSource: CinemaCode_to_Cinema
+        type: MovieSubscription
+        field: cinema
+        request: request-subscription_cinema.vtl
+        response: response-to-json.vtl
+      - dataSource: MovieCode_to_Movie
+        type: MovieSubscription
+        field: movie
+        request: request-subscription_movie.vtl
+        response: response-to-json.vtl
     schema: # defaults schema.graphql
     serviceRole: AppSyncServiceRole-${self:custom.stage}
     dataSources:
@@ -113,19 +127,19 @@ custom:
         name: regionsDataSource
         description: 'Lambda DataSource'
         config:
-          functionName: regions # The function name in your serverless.yml. Ignored if lambdaFunctionArn is provided.
+          functionName: all_regions # The function name in your serverless.yml. Ignored if lambdaFunctionArn is provided.
           serviceRoleArn: { Fn::GetAtt: [AppSyncLambdaServiceRole, Arn] } # Where AppSyncLambdaServiceRole is an IAM role defined in Resources
       - type: AWS_LAMBDA
         name: cinemasDataSource
         description: 'Lambda DataSource'
         config:
-          functionName: cinemas
+          functionName: all_cinemas
           serviceRoleArn: { Fn::GetAtt: [AppSyncLambdaServiceRole, Arn] }
       - type: AWS_LAMBDA
         name: moviesDataSource
         description: 'Lambda DataSource'
         config:
-          functionName: movies
+          functionName: all_movies
           serviceRoleArn: { Fn::GetAtt: [AppSyncLambdaServiceRole, Arn] }
       - type: AWS_LAMBDA
         name: mySubscriptionsDataSource
@@ -137,7 +151,19 @@ custom:
         name: RegionCode_to_Region
         description: 'Converts a region code to a Region object'
         config:
-          functionName: regioncodeToRegion
+          functionName: region_from_code
+          serviceRoleArn: { Fn::GetAtt: [AppSyncLambdaServiceRole, Arn] }
+      - type: AWS_LAMBDA
+        name: CinemaCode_to_Cinema
+        description: 'Converts a cinema code to a Cinema object'
+        config:
+          functionName: cinema_from_code
+          serviceRoleArn: { Fn::GetAtt: [AppSyncLambdaServiceRole, Arn] }
+      - type: AWS_LAMBDA
+        name: MovieCode_to_Movie
+        description: 'Converts a movie code to a Movie object'
+        config:
+          functionName: movie_from_code
           serviceRoleArn: { Fn::GetAtt: [AppSyncLambdaServiceRole, Arn] }
       - type: AWS_LAMBDA
         name: subscribeFunction

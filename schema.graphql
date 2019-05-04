@@ -53,8 +53,8 @@ input PushSubscriptionKeysInput {
 type MovieSubscription {
   uuid: String!
   region: Region
-  cinemaCode: String!
-  movieCode: String!
+  cinema: Cinema
+  movie: Movie
   dateStr: String!
   webPushSubscription: String!
 }
