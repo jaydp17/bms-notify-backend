@@ -47,6 +47,7 @@ functions:
     description: A cron that checks if Avengers Endgame is available in my favorite cinemas
     events:
       - schedule:
+          enabled: false
           name: bms-notify-endgame-checker-cron-${self:custom.stage}
           description: A cron that checks if Avengers Endgame is available in my favorite cinemas
           rate: rate(15 minutes)
