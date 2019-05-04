@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/node:11.14
+      - image: circleci/node:12.1
 
     working_directory: ~/repo
 
@@ -30,7 +30,7 @@ jobs:
           name: Build dependencies
           command: sudo apt-get install libzmq3-dev
 
-      - run: yarn install
+      - run: yarn install --frozen-lockfile
 
       # - save_cache:
       #     paths:
