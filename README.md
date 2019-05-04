@@ -33,3 +33,8 @@ $ brew cask install graphql-playground
 ```
 
 Now just open the project root in graphql-playground
+
+## TODO
+
+- [ ] add pino logger
+- [ ] add a handlerWrap for every handler
