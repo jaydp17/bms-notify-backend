@@ -3,9 +3,9 @@ import { getAvailableVenueCodes } from '../../bookmyshow/api';
 import { getWebPush } from '../../webpush';
 
 const regionCode = 'BANG';
-const endgameEventCode3D = 'ET00100559';
+const endgameEventCode3D = 'ET00106002';
 const venuesOfChoice = [
-  // 'CXBL', // spirit
+  'CXBL', // spirit
   'PVBN', // forum mall, koramangala
 ];
 
@@ -14,7 +14,7 @@ export const handler = async () => {
     const availableVenueCodes = await getAvailableVenueCodes(
       endgameEventCode3D,
       regionCode,
-      '20190426',
+      '20190705',
     );
     const venueIntersection = _.intersection(availableVenueCodes, venuesOfChoice);
     console.log('venueIntersection', venueIntersection);
@@ -23,7 +23,7 @@ export const handler = async () => {
     const pushSubscriptions = JSON.parse(process.env.PUSH_SUBSCRIPTIONS || '[]') as any[];
     const webpush = getWebPush();
     const notificationPayload = {
-      title: 'Avengers: EndGame 🎉',
+      title: 'Spider-Man: Far From Home 🎉',
       body: 'Available in your favorite cinemas',
     };
     await Promise.all(
